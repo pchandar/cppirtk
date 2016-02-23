@@ -40,4 +40,5 @@ before_script:
 
 script:
   - make
+  - cd ${TRAVIS_BUILD_DIR}
   - python setup.py install
