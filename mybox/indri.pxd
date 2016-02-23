@@ -1,5 +1,7 @@
 from libcpp.string cimport string
 cdef extern from "indri/QueryEnvironment.hpp" namespace "indri::api":
+    cimport "inttypes.h"
+    ctypedef int64_t           INT64;
     cdef cppclass QueryEnvironment:
         QueryEnvironment() #except +
         int termCount()
@@ -18,54 +20,18 @@ cdef extern from "indri/QueryEnvironment.hpp" namespace "indri::api":
         void removeServer(string)
         void removeIndex(string)
         QueryResults runQuery(QueryRequest)
-
-      /// \brief Run an Indri query language query. @see ScoredExtentResult
-      /// @param query the query to run
-      /// @param resultsRequested maximum number of results to return
-      /// @return the vector of ScoredExtentResults for the query
-      std::vector<indri::api::ScoredExtentResult> runQuery( const std::string& query, int resultsRequested, const std::string &queryType = "indri" );
-
-      /// \brief Run an Indri query language query. @see ScoredExtentResult
-      /// @param query the query to run
-      /// @param documentSet the working set of document ids to evaluate
-      /// @param resultsRequested maximum number of results to return
-      /// @return the vector of ScoredExtentResults for the query
-      std::vector<indri::api::ScoredExtentResult> runQuery( const std::string& query, const std::vector<lemur::api::DOCID_T>& documentSet, int resultsRequested, const std::string &queryType = "indri" );
-
-      /// \brief Run an Indri query language query. @see QueryAnnotation
-      /// @param query the query to run
-      /// @param resultsRequested maximum number of results to return
-      /// @return pointer to QueryAnnotations for the query
-      QueryAnnotation* runAnnotatedQuery( const std::string& query, int resultsRequested, const std::string &queryType = "indri" );
-
-      /// \brief Run an Indri query language query. @see QueryAnnotation
-      /// @param query the query to run
-      /// @param documentSet the working set of document ids to evaluate
-      /// @param resultsRequested maximum number of results to return
-      /// @return pointer to QueryAnnotations for the query
-      QueryAnnotation* runAnnotatedQuery( const std::string& query, const std::vector<lemur::api::DOCID_T>& documentSet, int resultsRequested, const std::string &queryType = "indri" );
+        #std::vector<indri::api::ScoredExtentResult> runQuery( const std::string& query, int resultsRequested, const std::string &queryType = "indri" );
+        #std::vector<indri::api::ScoredExtentResult> runQuery( const std::string& query, const std::vector<lemur::api::DOCID_T>& documentSet, int resultsRequested, const std::string &queryType = "indri" );
+        #QueryAnnotation* runAnnotatedQuery( const std::string& query, int resultsRequested, const std::string &queryType = "indri" );
+        #QueryAnnotation* runAnnotatedQuery( const std::string& query, const std::vector<lemur::api::DOCID_T>& documentSet, int resultsRequested, const std::string &queryType = "indri" );
 
 
-      /// \brief Fetch the parsed documents for a given list of document ids.
-      /// Caller is responsible for deleting the returned elements.
-      /// @param documentIDs the list of ids
-      /// @return the vector of ParsedDocument pointers.
-      std::vector<indri::api::ParsedDocument*> documents( const std::vector<lemur::api::DOCID_T>& documentIDs );
-      /// \brief Fetch the parsed documents for a given list of ScoredExtentResults
-      /// Caller is responsible for deleting the returned elements.
-      /// @param results the list of ScoredExtentResults
-      /// @return the vector of ParsedDocument pointers.
-      std::vector<indri::api::ParsedDocument*> documents( const std::vector<indri::api::ScoredExtentResult>& results );
-      /// \brief Fetch the named metadata attribute for a list of document ids
-      /// @param documentIDs the list of ids
-      /// @param attributeName the name of the metadata attribute
-      /// @return the vector of string values for that attribute
-      std::vector<std::string> documentMetadata( const std::vector<lemur::api::DOCID_T>& documentIDs, const std::string& attributeName );
-      /// \brief Fetch the named metadata attribute for a list of ScoredExtentResults
-      /// @param documentIDs the list of ScoredExtentResults
-      /// @param attributeName the name of the metadata attribute
-      /// @return the vector of string values for that attribute
-      std::vector<std::string> documentMetadata( const std::vector<indri::api::ScoredExtentResult>& documentIDs, const std::string& attributeName );
+        #std::vector<indri::api::ParsedDocument*> documents( const std::vector<lemur::api::DOCID_T>& documentIDs );
+        #std::vector<indri::api::ParsedDocument*> documents( const std::vector<indri::api::ScoredExtentResult>& results );
+
+
+        #std::vector<std::string> documentMetadata( const std::vector<lemur::api::DOCID_T>& documentIDs, const std::string& attributeName );
+        #std::vector<std::string> documentMetadata( const std::vector<indri::api::ScoredExtentResult>& documentIDs, const std::string& attributeName );
 
       /// \brief Fetch the XPath names of extents for a list of ScoredExtentResults
       /// @param results the list of ScoredExtentResults
@@ -145,33 +111,19 @@ cdef extern from "indri/QueryEnvironment.hpp" namespace "indri::api":
       /// @return total number of documents containing stem in the aggregated collection
       INT64 documentStemCount( const std::string& stem );
 
-      /// \brief Return the length of a document.
-      /// @param documentID the document id.
-      /// @return length of the document, documentID
-      int documentLength(lemur::api::DOCID_T documentID);
 
-      /// \brief Fetch a document vector for a list of documents.
-      /// Caller responsible for deleting the Vector.
-      /// @param documentIDs the vector of document ids.
-      /// @return DocumentVector pointer for the specified document.
-      std::vector<DocumentVector*> documentVectors( const std::vector<lemur::api::DOCID_T>& documentIDs );
+      #int documentLength(lemur::api::DOCID_T documentID);
 
-      /// \brief set maximum number of wildcard terms to expand to.
-      /// @param maxTerms the maximum number of terms to expand a wildcard
-      /// operator argument (default 100).
-      void setMaxWildcardTerms(int maxTerms);
 
-      /// \brief return the internal query servers.
-      /// @return the local and network query servers.
-      const std::vector<indri::server::QueryServer*>& getServers() const {
-        return _servers;
-      }
+      #std::vector<DocumentVector*> documentVectors( const std::vector<lemur::api::DOCID_T>& documentIDs );
+
+
+      void setMaxWildcardTerms(int maxTerms)
+
+
+      #const std::vector<indri::server::QueryServer*>& getServers()
 
       /// \brief set the query reformulation parameters.
       /// @param p the Parameters object containing the parameters.
       void setFormulationParameters(Parameters &p);
 
-      /// \brief reformulate a query.
-      /// @param query the bag of words query to reformulate.
-      /// @return the indri query language reformulated query.
-      std::string reformulateQuery(const std::string &query);

@@ -31,7 +31,7 @@ install:
     fi
 
 before_script:
-  - pip install --upgrade pip
+  - sudo pip install --upgrade pip
   - cd ${TRAVIS_BUILD_DIR}
   - sudo apt-get update
   - mkdir build
