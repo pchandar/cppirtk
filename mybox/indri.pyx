@@ -41,10 +41,7 @@ cdef class PyTestClass:
         else:
             return 0
 
-    def addIndex(PyTestClass self, string indexName):
-        self._check_alive()
-        self._thisptr.addIndex(indexName)
-        return
+
 
     def termCount(PyTestClass self):
         self._check_alive()
@@ -55,30 +52,37 @@ cdef class PyTestClass:
         self._check_alive()
         return self._thisptr.documentCount()
 
-    cpdef setMemory(PyTestClass self, int size):
+    def setMemory(PyTestClass self, int size):
         self._check_alive()
         self._thisptr.setMemory(size)
 
-    def termCount(PyTestClass self):
+    def setBaseline(PyTestClass self, string baseline):
         self._check_alive()
-        return self._thisptr.termCount()
+        return self._thisptr.setBaseline(baseline)
 
-
-    def documentCount(PyTestClass self):
+    def setSingleBackgroundModel(PyTestClass self, bool isSingleBackgroundModel):
         self._check_alive()
-        return self._thisptr.documentCount()
+        return self._thisptr.setSingleBackgroundModel(isSingleBackgroundModel)
 
-    def documentCount(PyTestClass self):
+    def addServer(PyTestClass self, string serverName):
         self._check_alive()
-        return self._thisptr.documentCount()
+        return self._thisptr.addServer(serverName)
 
+    def addIndex(PyTestClass self, string indexName):
+        self._check_alive()
+        self._thisptr.addIndex(indexName)
 
+    def removeServer(PyTestClass self, string serverName):
+        self._check_alive()
+        self._thisptr.removeServer(serverName)
 
+    def removeIndex(PyTestClass self, string indexName):
+        self._check_alive()
+        self._thisptr.removeIndex(indexName)
 
-
-        void setMemory(int)
-        void setBaseline(string)
-        void setSingleBackgroundModel(bool)
+    def close(PyTestClass self):
+        self._check_alive()
+        self._thisptr.close()
 
 
     # The context manager protocol allows us to precisely
