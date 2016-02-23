@@ -31,8 +31,8 @@ install:
     fi
 
 before_script:
-  - apt-get install libffi-dev libssl-dev
   - sudo pip install --upgrade pip
+  - sudo pip install pyopenssl ndg-httpsclient pyasn1
   - cd ${TRAVIS_BUILD_DIR}
   - sudo apt-get update
   - mkdir build
