@@ -55,6 +55,32 @@ cdef class PyTestClass:
         self._check_alive()
         return self._thisptr.documentCount()
 
+    cpdef setMemory(PyTestClass self, int size):
+        self._check_alive()
+        self._thisptr.setMemory(size)
+
+    def termCount(PyTestClass self):
+        self._check_alive()
+        return self._thisptr.termCount()
+
+
+    def documentCount(PyTestClass self):
+        self._check_alive()
+        return self._thisptr.documentCount()
+
+    def documentCount(PyTestClass self):
+        self._check_alive()
+        return self._thisptr.documentCount()
+
+
+
+
+
+        void setMemory(int)
+        void setBaseline(string)
+        void setSingleBackgroundModel(bool)
+
+
     # The context manager protocol allows us to precisely
     # control the liftetime of the wrapped C++ object. del
     # is called deterministically and independently of

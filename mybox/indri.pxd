@@ -37,7 +37,7 @@ cdef extern from "indri/QueryEnvironment.hpp" namespace "indri::api":
         #std::vector<indri::api::ParsedDocument*> documentsFromMetadata( const std::string& attributeName, const std::vector<std::string>& attributeValues );
         #std::vector<lemur::api::DOCID_T> documentIDsFromMetadata( const std::string& attributeName, const std::vector<std::string>& attributeValue );
 
-        string stemTerm(string)
+        bytes stemTerm(string)
 
         INT64 termCountUnique()
 
