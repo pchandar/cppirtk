@@ -46,10 +46,14 @@ cdef class PyTestClass:
         self._thisptr.addIndex(indexName)
         return
 
-    def getTermCount(PyTestClass self):
+    def termCount(PyTestClass self):
         self._check_alive()
         return self._thisptr.termCount()
 
+
+    def documentCount(PyTestClass self):
+        self._check_alive()
+        return self._thisptr.documentCount()
 
     # The context manager protocol allows us to precisely
     # control the liftetime of the wrapped C++ object. del
