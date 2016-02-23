@@ -92,41 +92,34 @@ cdef class PyTestClass:
         self._check_alive()
         return self._thisptr.stemTerm()
 
-        INT64 termCountUnique()
-    def close(PyTestClass self):
+    def termCountUnique(PyTestClass self):
         self._check_alive()
-        return self._thisptr.close()
+        return self._thisptr.termCountUnique()
 
-        INT64 termCount()
 
     def close(PyTestClass self):
         self._check_alive()
         return self._thisptr.close()
 
-        INT64 termCount(string)
+    def termCount(PyTestClass self, string term):
+        self._check_alive()
+        return self._thisptr.termCount(term)
+
     def close(PyTestClass self, string term):
         self._check_alive()
-        return self._thisptr.close()
+        return self._thisptr.stemCount(term)
 
-        INT64 stemCount(string)
-    def close(PyTestClass self, string term):
-        self._check_alive()
-        return self._thisptr.close()
-
-        INT64 termFieldCount(string, string)
     def close(PyTestClass self, string term, string field):
         self._check_alive()
-        return self._thisptr.close()
+        return self._thisptr.termFieldCount(term, field)
 
-        INT64 stemFieldCount(string, string )
-    def close(PyTestClass self, string term, string field):
+    def stemFieldCount(PyTestClass self, string term, string field):
         self._check_alive()
-        return self._thisptr.close()
+        return self._thisptr.stemFieldCount(term, field)
 
-        double expressionCount(string, string)
-    def close(PyTestClass self, string term, string field):
+    def expressionCount(PyTestClass self, string term, string field):
         self._check_alive()
-        return self._thisptr.close()
+        return self._thisptr.expressionCount(term, field)
 
     def documentExpressionCount(PyTestClass self, string term, string field):
         self._check_alive()

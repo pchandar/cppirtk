@@ -5,7 +5,7 @@ python:
   - 2.7
 
 env:
-  - BACKEND=clang
+  - BACKEND=cpp
 
 cache:
   apt: true
@@ -35,15 +35,16 @@ install:
     fi
 
 before_script:
+  - sudo pip install --upgrade pip
+  - sudo -H pip install Cython
   - export CXX=clang++
   - export CC=clang
-  - sudo pip install --upgrade pip
   - cd ${TRAVIS_BUILD_DIR}
   - sudo apt-get update
   - mkdir build
   - cd build
   - cmake ..
-  - sudo -H pip install Cython
+
 
 script:
   - make
