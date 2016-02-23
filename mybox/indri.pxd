@@ -1,7 +1,6 @@
 from libcpp.string cimport string
 cdef extern from "indri/QueryEnvironment.hpp" namespace "indri::api":
-    cimport "inttypes.h"
-    ctypedef int64_t           INT64;
+    ctypedef long long INT64;
     cdef cppclass QueryEnvironment:
         QueryEnvironment() #except +
         int termCount()
@@ -88,28 +87,17 @@ cdef extern from "indri/QueryEnvironment.hpp" namespace "indri::api":
       /// @param expression The expression to evaluate, probably an ordered or unordered window expression
       double documentExpressionCount( const std::string& expression,
                               const std::string &queryType = "indri" );
-      /// \brief Return all the occurrences of this expression in the collection.
-      /// Note that the returned vector may be quite large for large collections, and therefore
-      /// has the very real possibility of exhausting the memory of the machine.  Use this method
-      /// with discretion.
-      /// @param expression The expression to evaluate, probably an ordered or unordered window expression
-      std::vector<ScoredExtentResult> expressionList( const std::string& expression,
-                                                      const std::string& queryType = "indri" );
-      /// \brief Return the list of fields.
-      /// @return vector of field names.
-      std::vector<std::string> fieldList();
-      /// \brief Return total number of documents in the collection.
-      /// @return total number of documents in the aggregated collection
-      INT64 documentCount();
-      /// \brief Return total number of documents containing term in the collection.
-      /// @param term the term to count documents for.
-      /// @return total number of documents containing term in the aggregated collection
-      INT64 documentCount( const std::string& term );
 
-      /// \brief Return total number of documents containing stem in the collection.
-      /// @param stem the prestemmed term to count documents for.
-      /// @return total number of documents containing stem in the aggregated collection
-      INT64 documentStemCount( const std::string& stem );
+      std::vector<ScoredExtentResult> expressionList( const std::string
+                                                      const std::string& queryType = "indri" );
+
+      #std::vector<std::string> fieldList();
+
+      INT64 documentCount();
+      INT64 documentCount(string)
+
+
+      INT64 documentStemCount(string)
 
 
       #int documentLength(lemur::api::DOCID_T documentID);
@@ -118,12 +106,10 @@ cdef extern from "indri/QueryEnvironment.hpp" namespace "indri::api":
       #std::vector<DocumentVector*> documentVectors( const std::vector<lemur::api::DOCID_T>& documentIDs );
 
 
-      void setMaxWildcardTerms(int maxTerms)
+      void setMaxWildcardTerms(int)
 
 
       #const std::vector<indri::server::QueryServer*>& getServers()
 
-      /// \brief set the query reformulation parameters.
-      /// @param p the Parameters object containing the parameters.
-      void setFormulationParameters(Parameters &p);
+      #void setFormulationParameters(Parameters &p);
 
