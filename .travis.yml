@@ -38,8 +38,8 @@ before_script:
   - mkdir build
   - cd build
   - cmake ..
-  - sudo pip install cpp-coveralls wheel
-  - sudo pip install Cython
+  - sudo -H pip install cpp-coveralls wheel
+  - sudo -H pip install Cython
 
 script:
   - make

@@ -18,7 +18,7 @@ cdef extern from "indri/QueryEnvironment.hpp" namespace "indri::api":
         void close()
         void removeServer(string)
         void removeIndex(string)
-        QueryResults runQuery(QueryRequest)
+        #QueryResults runQuery(QueryRequest)
         #std::vector<indri::api::ScoredExtentResult> runQuery( const std::string& query, int resultsRequested, const std::string &queryType = "indri" );
         #std::vector<indri::api::ScoredExtentResult> runQuery( const std::string& query, const std::vector<lemur::api::DOCID_T>& documentSet, int resultsRequested, const std::string &queryType = "indri" );
         #QueryAnnotation* runAnnotatedQuery( const std::string& query, int resultsRequested, const std::string &queryType = "indri" );
@@ -32,84 +32,53 @@ cdef extern from "indri/QueryEnvironment.hpp" namespace "indri::api":
         #std::vector<std::string> documentMetadata( const std::vector<lemur::api::DOCID_T>& documentIDs, const std::string& attributeName );
         #std::vector<std::string> documentMetadata( const std::vector<indri::api::ScoredExtentResult>& documentIDs, const std::string& attributeName );
 
-      /// \brief Fetch the XPath names of extents for a list of ScoredExtentResults
-      /// @param results the list of ScoredExtentResults
-      /// @return the vector of string XPath names for the extents
-      std::vector<std::string> pathNames( const std::vector<indri::api::ScoredExtentResult>& results );
+
+        #std::vector<std::string> pathNames( const std::vector<indri::api::ScoredExtentResult>& results );
+        #std::vector<indri::api::ParsedDocument*> documentsFromMetadata( const std::string& attributeName, const std::vector<std::string>& attributeValues );
+        #std::vector<lemur::api::DOCID_T> documentIDsFromMetadata( const std::string& attributeName, const std::vector<std::string>& attributeValue );
+
+        string stemTerm(string)
+
+        INT64 termCountUnique()
+
+        INT64 termCount()
 
 
-      /// \brief Fetch all documents with a metadata key that matches attributeName, with a value matching one of the attributeValues.
-      /// @param attributeName the name of the metadata attribute (e.g. 'url' or 'docno')
-      /// @param attributeValues values that the metadata attribute should match
-      /// @return a vector of ParsedDocuments that match the given metadata criteria
-      std::vector<indri::api::ParsedDocument*> documentsFromMetadata( const std::string& attributeName, const std::vector<std::string>& attributeValues );
-
-      /// \brief Return a list of document IDs where the document has a metadata key that matches attributeName, with a value matching one of the attributeValues.
-      /// @param attributeName the name of the metadata attribute (e.g. 'url' or 'docno')
-      /// @param attributeValue values that the metadata attribute should match
-      /// @return a vector of ParsedDocuments that match the given metadata criteria
-      std::vector<lemur::api::DOCID_T> documentIDsFromMetadata( const std::string& attributeName, const std::vector<std::string>& attributeValue );
-      /// \brief Return the stem of the term
-      /// @param term the term to stem
-      /// @return the stem of the term
-      std::string stemTerm(const std::string &term);
-      /// \brief Return total number of unique terms.
-      /// @return total number of unique terms in the aggregated collection
-      INT64 termCountUnique();
-      /// \brief Return total number of terms.
-      /// @return total number of terms in the aggregated collection
-      INT64 termCount();
-      /// \brief Return total number of term occurrences.
-      /// @param term the term to count
-      /// @return total frequency of this term in the aggregated collection
-      INT64 termCount( const std::string& term );
-      /// \brief Return total number of stem occurrences.
-      /// @param term the stem to count
-      /// @return total frequency of this stem in the aggregated collection
-      INT64 stemCount( const std::string& term );
-      /// \brief Return total number of term occurrences within a field.
-      /// @param term the term to count
-      /// @param field the name of the field
-      /// @return total frequency of this term within this field in the
-      /// aggregated collection
-      INT64 termFieldCount( const std::string& term, const std::string& field );
-      /// \brief Return total number of stem occurrences within a field.
-      /// @param term the stem to count
-      /// @param field the name of the field
-      /// @return total frequency of this stem within this field in the
-      /// aggregated collection
-      INT64 stemFieldCount( const std::string& term, const std::string& field );
-      /// \brief Return the total number of times this expression appears in the collection.
-      /// @param expression The expression to evaluate, probably an ordered or unordered window expression
-      double expressionCount( const std::string& expression,
-                              const std::string &queryType = "indri" );
-      /// \brief Return the total number of documents this expression appears in the collection.
-      /// @param expression The expression to evaluate, probably an ordered or unordered window expression
-      double documentExpressionCount( const std::string& expression,
-                              const std::string &queryType = "indri" );
-
-      std::vector<ScoredExtentResult> expressionList( const std::string
-                                                      const std::string& queryType = "indri" );
-
-      #std::vector<std::string> fieldList();
-
-      INT64 documentCount();
-      INT64 documentCount(string)
+        INT64 termCount(string)
 
 
-      INT64 documentStemCount(string)
+        INT64 stemCount(string)
 
 
-      #int documentLength(lemur::api::DOCID_T documentID);
+        INT64 termFieldCount(string, string)
 
 
-      #std::vector<DocumentVector*> documentVectors( const std::vector<lemur::api::DOCID_T>& documentIDs );
+        INT64 stemFieldCount(string, string )
+
+        double expressionCount(string, string)
+
+        double documentExpressionCount(string, string )
+        #std::vector<ScoredExtentResult> expressionList(string, string)
+
+        #std::vector<std::string> fieldList();
+
+        INT64 documentCount();
+        INT64 documentCount(string)
 
 
-      void setMaxWildcardTerms(int)
+        INT64 documentStemCount(string)
 
 
-      #const std::vector<indri::server::QueryServer*>& getServers()
+        #int documentLength(lemur::api::DOCID_T documentID);
 
-      #void setFormulationParameters(Parameters &p);
+
+        #std::vector<DocumentVector*> documentVectors( const std::vector<lemur::api::DOCID_T>& documentIDs );
+
+
+        void setMaxWildcardTerms(int)
+
+
+        #const std::vector<indri::server::QueryServer*>& getServers()
+
+        #void setFormulationParameters(Parameters &p);
 
