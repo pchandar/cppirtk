@@ -5,8 +5,7 @@ python:
   - 2.7
 
 env:
-  - BACKEND=c
-  - BACKEND=cpp
+  - BACKEND=clang
 
 cache:
   apt: true
@@ -36,6 +35,8 @@ install:
     fi
 
 before_script:
+  - export CXX=clang++
+  - export CC=clang
   - sudo pip install --upgrade pip
   - cd ${TRAVIS_BUILD_DIR}
   - sudo apt-get update

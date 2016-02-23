@@ -84,6 +84,78 @@ cdef class PyTestClass:
         self._check_alive()
         self._thisptr.close()
 
+    def close(PyTestClass self):
+        self._check_alive()
+        self._thisptr.close()
+
+    def stemTerm(PyTestClass self, string term):
+        self._check_alive()
+        return self._thisptr.stemTerm()
+
+        INT64 termCountUnique()
+    def close(PyTestClass self):
+        self._check_alive()
+        return self._thisptr.close()
+
+        INT64 termCount()
+
+    def close(PyTestClass self):
+        self._check_alive()
+        return self._thisptr.close()
+
+        INT64 termCount(string)
+    def close(PyTestClass self, string term):
+        self._check_alive()
+        return self._thisptr.close()
+
+        INT64 stemCount(string)
+    def close(PyTestClass self, string term):
+        self._check_alive()
+        return self._thisptr.close()
+
+        INT64 termFieldCount(string, string)
+    def close(PyTestClass self, string term, string field):
+        self._check_alive()
+        return self._thisptr.close()
+
+        INT64 stemFieldCount(string, string )
+    def close(PyTestClass self, string term, string field):
+        self._check_alive()
+        return self._thisptr.close()
+
+        double expressionCount(string, string)
+    def close(PyTestClass self, string term, string field):
+        self._check_alive()
+        return self._thisptr.close()
+
+    def documentExpressionCount(PyTestClass self, string term, string field):
+        self._check_alive()
+        return self._thisptr.documentExpressionCount(term, field)
+
+    def documentCount(PyTestClass self):
+        self._check_alive()
+        return self._thisptr.documentCount()
+
+
+    def documentCount(PyTestClass self, string term):
+        self._check_alive()
+        return self._thisptr.documentCount(term)
+
+    def documentStemCount(PyTestClass self, string term):
+        self._check_alive()
+        return self._thisptr.documentStemCount(term)
+
+    def setMaxWildcardTerms(PyTestClass self, int maxTerms):
+        self._check_alive()
+        return self._thisptr.setMaxWildcardTerms(maxTerms)
+
+
+
+
+
+
+
+
 
     # The context manager protocol allows us to precisely
     # control the liftetime of the wrapped C++ object. del
