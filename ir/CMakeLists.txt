@@ -1,0 +1,18 @@
+cmake_minimum_required (VERSION 3.0)
+project (ir C CXX)
+set (IR_VERSION_MAJOR 0)
+set (IR_VERSION_MINOR 1)
+find_package(FLEX)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/build")
+set(CMAKE_MACOSX_RPATH 1)
+set(CMAKE_VERBOSE_MAKEFILE TRUE)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m64 -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_FSEEKO=1 -DHAVE_EXT_ATOMICITY_H=1 -DP_NEEDS_GNU_CXX_NAMESPACE=1 -DHAVE_MKSTEMP=1 -DHAVE_MKSTEMPS=1 -stdlib=libstdc++ -g -O3")
+
+
+add_subdirectory(indri)
+
+include_directories(api/include)
+file(GLOB SOURCES "api/src/*.cpp")
+add_library(ir SHARED ${SOURCES})
+target_link_libraries(ir indri)
